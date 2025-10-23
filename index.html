@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><Daniel Mulomba>'s Awesome Web Page.</title>
+    <meta name="robots" content="noindex, nofollow">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      text-align: center;
+      margin-top: 60px;
+    }
+    h1 {
+      color: #143560;
+    }
+    .report {
+      background-color: #fff;
+      padding: 20px;
+      margin: 0 auto;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    strong {
+      color: #0f2d54;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Ask for user name
+  let username = prompt("Enter your name:");
+
+  let subtotal = 0;
+  let input;
+
+  // Posttest Loop (do...while)
+  do {
+    input = prompt("Enter the dollar amount for your sales a single sale at a time. Enter Done when you are finished):");
+
+    if (input.toLowerCase() !== "done") {
+      let sale = parseFloat(input);
+
+      // Check if input is a valid number
+      if (!isNaN(sale) && sale > 0) {
+        subtotal += sale;
+      } else {
+        alert("Please enter a valid number or 'Done'.");
+      }
+    }
+
+  } while (input.toLowerCase() !== "done");
+
+  // Determine commission rate based on subtotal
+  let commissionRate = 0;
+
+  if (subtotal <= 0) {
+    commissionRate = 0;
+  } else if (subtotal <= 499.99) {
+    commissionRate = 0.05;
+  } else if (subtotal <= 999.99) {
+    commissionRate = 0.10;
+  } else {
+    commissionRate = 0.15;
+  }
+
+  // Calculate commission and total earnings
+  let commission = subtotal * commissionRate;
+  let totalEarnings = subtotal + commission;
+
+  // Format numbers
+  const formatCurrency = (num) => "$" + num.toFixed(2);
+  const formatPercent = (num) => (num * 100).toFixed(2) + "%";
+
+  // Single output
+  document.write(`
+    <div class="report">
+      <h1>Hello ${username},</h1>
+      <p>Here is your <strong>Weekly Commission Report</strong>.</p>
+      <p>Your sales total is <strong>${formatCurrency(subtotal)}</strong>, so your commission rate is <strong>${formatPercent(commissionRate)}</strong>.</p>
+      <p>Your total commission is <strong>${formatCurrency(commission)}</strong>.</p>
+      <p>Your total earnings are <strong>${formatCurrency(totalEarnings)}</strong>.</p>
+    </div>
+  `);
+</script>
+
+</body>
+</html>
